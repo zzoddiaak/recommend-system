@@ -2,6 +2,7 @@ package recommendsys.recommend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import recommendsys.recommend.entity.Product;
 import recommendsys.recommend.entity.Rating;
 import recommendsys.recommend.repository.OrderItemRepository;
@@ -14,6 +15,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 public class RecommendationService {
 
     private final UserRepository userRepository;
