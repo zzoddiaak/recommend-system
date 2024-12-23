@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd
+      http://www.liquibase.org/xml/ns/pro
+      http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.1.xsd"
+        logicalFilePath="db">
+    <changeSet id="create-users" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/create-users.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-products" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/create-products.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-orders" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/create-orders.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-order_items" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/create-order_items.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="create-ratings" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/create-ratings.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+
+    <changeSet id="insert-table" author="Daniil">
+        <sqlFile encoding="utf8" path="sql/insert-table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
