@@ -38,18 +38,6 @@ public class RecommendationService {
     }
 
     /**
-     * Рекомендации на основе популярных товаров в категории
-     * @param category Категория товара
-     * @return Список рекомендуемых товаров
-     */
-    public List<Product> recommendPopularProductsByCategory(String category) {
-        return productRepository.findAvailableProductsByCategory(category)
-                .stream()
-                .limit(10) // Берем топ-10 товаров по категории
-                .collect(Collectors.toList());
-    }
-
-    /**
      * Рекомендации на основе рейтингов товаров
      * @return Список топ-товаров
      */
