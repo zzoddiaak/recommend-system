@@ -15,4 +15,8 @@ public interface RatingRepository extends JpaRepository<Rating, Long> {
 
     @Query("SELECT r FROM Rating r WHERE r.product.productId = :productId")
     List<Rating> findRatingsByProductId(Long productId);
+
+    @Query("SELECT AVG(r.rating) FROM Rating r WHERE r.product.productId = :productId")
+    Double calculateAverageRating(Long productId); // возвращает средний рейтинг для продукта
+
 }

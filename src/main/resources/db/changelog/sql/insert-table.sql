@@ -11,18 +11,28 @@ INSERT INTO users (username, email) VALUES
 ('user9', 'user9@example.com'),
 ('user10', 'user10@example.com');
 
--- Наполнение таблицы products
-INSERT INTO products (name, category, price, stock) VALUES
-('Smartphone X', 'Electronics', 699.99, 50),
-('Laptop Pro', 'Electronics', 1299.99, 30),
-('Wireless Earbuds', 'Accessories', 199.99, 100),
-('Coffee Maker', 'Home Appliances', 99.99, 20),
-('Desk Chair', 'Furniture', 149.99, 15),
-('Gaming Console', 'Electronics', 499.99, 25),
-('Blender Pro', 'Home Appliances', 89.99, 40),
-('Office Desk', 'Furniture', 249.99, 10),
-('Smart Watch', 'Electronics', 299.99, 60),
-('Vacuum Cleaner', 'Home Appliances', 149.99, 30);
+INSERT INTO products (name, category, price, stock, rating) VALUES
+('Smartphone X', 'Electronics', 699.99, 50,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 1)),
+('Laptop Pro', 'Electronics', 1299.99, 30,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 2)),
+('Wireless Earbuds', 'Accessories', 199.99, 100,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 3)),
+('Coffee Maker', 'Home Appliances', 99.99, 20,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 4)),
+('Desk Chair', 'Furniture', 149.99, 15,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 5)),
+('Gaming Console', 'Electronics', 499.99, 25,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 6)),
+('Blender Pro', 'Home Appliances', 89.99, 40,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 7)),
+('Office Desk', 'Furniture', 249.99, 10,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 8)),
+('Smart Watch', 'Electronics', 299.99, 60,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 9)),
+('Vacuum Cleaner', 'Home Appliances', 149.99, 30,
+    (SELECT AVG(rating) FROM ratings WHERE product_id = 10));
+
 
 -- Наполнение таблицы orders
 INSERT INTO orders (user_id) VALUES

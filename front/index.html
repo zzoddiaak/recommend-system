@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Recommendation System</h1>
+
+    <!-- Новый раздел для информации о пользователе -->
+    <section>
+        <h2>User Details</h2>
+        <input type="number" id="userIdInputDetails" placeholder="Enter User ID" />
+        <button id="fetchUserDetails">Get User Details</button>
+        <div id="userDetails"></div>
+    </section>
+
+    <!-- Новый раздел для заказов пользователя -->
+    <section>
+        <h2>User Orders</h2>
+        <input type="number" id="userIdInputOrders" placeholder="Enter User ID" />
+        <button id="fetchUserOrders">Get User Orders</button>
+        <ul id="userOrders"></ul>
+    </section>
+
+    <!-- Новый раздел для оценок пользователя -->
+    <section>
+        <h2>User Ratings</h2>
+        <input type="number" id="userIdInputRatingsDetails" placeholder="Enter User ID" />
+        <button id="fetchUserRatings">Get User Ratings</button>
+        <ul id="userRatings"></ul>
+    </section>
+
+    <!-- Top-Rated Products -->
+    <section>
+        <h2>Top-Rated Products</h2>
+        <button id="fetchTopRated">Get Top-Rated Products</button>
+        <ul id="topRatedProducts"></ul>
+    </section>
+
+    <!-- Personalized Recommendations -->
+    <section>
+        <h2>Personalized Recommendations</h2>
+        <input type="number" id="userIdInput" placeholder="Enter User ID" />
+        <button id="fetchPersonalized">Get Personalized Recommendations</button>
+        <ul id="personalRecommendations"></ul>
+    </section>
+
+    <!-- Recommendations Based on Ratings -->
+    <section>
+        <h2>Recommendations Based on Ratings</h2>
+        <input type="number" id="userIdInputRatings" placeholder="Enter User ID" />
+        <button id="fetchBasedOnRatings">Get Recommendations Based on Ratings</button>
+        <ul id="recommendationsBasedOnRatings"></ul>
+    </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>

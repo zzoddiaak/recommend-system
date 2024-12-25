@@ -3,8 +3,10 @@ package recommendsys.recommend.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import recommendsys.recommend.entity.Order;
 import recommendsys.recommend.entity.Product;
 import recommendsys.recommend.entity.Rating;
+import recommendsys.recommend.entity.User;
 import recommendsys.recommend.repository.OrderItemRepository;
 import recommendsys.recommend.repository.OrderRepository;
 import recommendsys.recommend.repository.ProductRepository;
@@ -13,7 +15,6 @@ import recommendsys.recommend.repository.UserRepository;
 
 import java.util.*;
 import java.util.stream.Collectors;
-
 @Service
 @Transactional
 public class RecommendationService {
@@ -37,15 +38,32 @@ public class RecommendationService {
         this.ratingRepository = ratingRepository;
     }
 
+    // Метод для получения данных о пользователе, включая его покупки и рейтинги
+    public User getUserDetails(Long userId) {
+        return userRepository.findById(userId).orElse(null);
+    }
+
+    // Метод для получения всех заказов пользователя
+    public List<Order> getUserOrders(Long userId) {
+        return orderRepository.findOrdersByUserId(userId);
+    }
+
+    // Метод для получения всех оценок пользователя
+    public List<Rating> getUserRatings(Long userId) {
+        return ratingRepository.findRatingsByUserId(userId);
+    }
+
     /**
      * Рекомендации на основе рейтингов товаров
      * @return Список топ-товаров
      */
     public List<Product> recommendTopRatedProducts() {
-        return productRepository.findTopRatedProducts()
-                .stream()
-                .limit(10) // Берем топ-10 по рейтингу
-                .collect(Collectors.toList());
+        List<Product> products = productRepository.findAll();
+        for (Product product : products) {
+            double averageRating = ratingRepository.calculateAverageRating(product.getProductId());
+            product.setRating(averageRating);  // Сеттинг рейтинга
+        }
+        return products;
     }
 
     /**
