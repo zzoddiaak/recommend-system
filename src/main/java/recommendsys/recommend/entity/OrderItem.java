@@ -2,6 +2,7 @@ package recommendsys.recommend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -34,6 +35,7 @@ public class OrderItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonManagedReference
     private Order order;
 
     @ManyToOne(fetch = FetchType.LAZY)

@@ -2,6 +2,7 @@ package recommendsys.recommend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -46,5 +47,6 @@ public class Order {
     private LocalDateTime orderDate;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Set<OrderItem> orderItems = new HashSet<>();
 }

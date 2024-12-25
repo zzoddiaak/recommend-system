@@ -1,30 +1,62 @@
 const apiUrl = "http://localhost:8080/api/recommendations";
-
-// Функция для отображения продуктов
-function displayProducts(containerId, products) {
-    const container = document.getElementById(containerId);
-    container.innerHTML = ""; // Очистка предыдущих результатов
-    if (products.length === 0) {
-        container.innerHTML = "<li>No products found.</li>";
-        return;
+async function fetchData(url) {
+    try {
+        const response = await fetch(url);
+        const data = await response.json();  // Проверка на валидность JSON
+        return data;
+    } catch (error) {
+        console.error("Ошибка при обработке данных:", error);
+        alert("Ошибка при получении данных.");
+        return null;
     }
-    products.forEach(product => {
-        const li = document.createElement("li");
-        li.textContent = `${product.name} (Rating: ${product.rating})`;
-        container.appendChild(li);
-    });
 }
 
-// Запрос топовых товаров
+document.getElementById("fetchUserDetails").addEventListener("click", async () => {
+    const userId = document.getElementById("userIdInputDetails").value;
+    if (!userId) {
+        alert("Please enter a User ID.");
+        return;
+    }
+    const data = await fetchData(`${apiUrl}/user/${userId}`);
+    if (data) {
+        displayUserDetails(data);
+    }
+});
+
+// Fetch User Details
+document.getElementById("fetchUserDetails").addEventListener("click", async () => {
+    const userId = document.getElementById("userIdInputDetails").value;
+    if (!userId) {
+        alert("Please enter a User ID.");
+        return;
+    }
+    const response = await fetch(`${apiUrl}/user/${userId}`);
+    const user = await response.json();
+    displayUserDetails(user);
+});
+
+// Fetch User Orders
+document.getElementById("fetchUserOrders").addEventListener("click", async () => {
+    const userId = document.getElementById("userIdInputOrders").value;
+    if (!userId) {
+        alert("Please enter a User ID.");
+        return;
+    }
+    const response = await fetch(`${apiUrl}/orders/${userId}`);
+    const orders = await response.json();
+    displayOrders(orders);
+});
+
+// Fetch Top-Rated Products
 document.getElementById("fetchTopRated").addEventListener("click", async () => {
     const response = await fetch(`${apiUrl}/top-rated`);
     const products = await response.json();
     displayProducts("topRatedProducts", products);
 });
 
-// Запрос персонализированных рекомендаций
+// Fetch Personalized Recommendations
 document.getElementById("fetchPersonalized").addEventListener("click", async () => {
-    const userId = document.getElementById("userIdInput").value;
+    const userId = document.getElementById("userIdInputPersonal").value;
     if (!userId) {
         alert("Please enter a User ID.");
         return;
@@ -34,7 +66,7 @@ document.getElementById("fetchPersonalized").addEventListener("click", async () 
     displayProducts("personalRecommendations", products);
 });
 
-// Запрос рекомендаций на основе оценок
+// Fetch Recommendations Based on Ratings
 document.getElementById("fetchBasedOnRatings").addEventListener("click", async () => {
     const userId = document.getElementById("userIdInputRatings").value;
     if (!userId) {
@@ -46,59 +78,33 @@ document.getElementById("fetchBasedOnRatings").addEventListener("click", async (
     displayProducts("recommendationsBasedOnRatings", products);
 });
 
-// Запрос информации о пользователе
-document.getElementById("fetchUserDetails").addEventListener("click", async () => {
-    const userId = document.getElementById("userIdInputDetails").value;
-    if (!userId) {
-        alert("Please enter a User ID.");
-        return;
-    }
-    const response = await fetch(`${apiUrl}/user/${userId}`);
-    const user = await response.json();
-    const userDetails = document.getElementById("userDetails");
-    userDetails.innerHTML = `<strong>Name:</strong> ${user.username} <br><strong>Email:</strong> ${user.email}`;
-});
+// Display User Details
+function displayUserDetails(user) {
+    const userDetailsDiv = document.getElementById("userDetails");
+    userDetailsDiv.innerHTML = `
+        <p><strong>Username:</strong> ${user.username}</p>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>Created At:</strong> ${new Date(user.createdAt).toLocaleString()}</p>
+    `;
+}
 
-// Запрос заказов пользователя
-document.getElementById("fetchUserOrders").addEventListener("click", async () => {
-    const userId = document.getElementById("userIdInputOrders").value;
-    if (!userId) {
-        alert("Please enter a User ID.");
-        return;
-    }
-    const response = await fetch(`${apiUrl}/user/${userId}/orders`);
-    const orders = await response.json();
-    const userOrders = document.getElementById("userOrders");
-    userOrders.innerHTML = "";
-    if (orders.length === 0) {
-        userOrders.innerHTML = "<li>No orders found.</li>";
-        return;
-    }
-    orders.forEach(order => {
-        const li = document.createElement("li");
-        li.textContent = `Order ID: ${order.orderId}, Date: ${order.date}`;
-        userOrders.appendChild(li);
-    });
-});
+// Display Orders
+function displayOrders(orders) {
+    const ordersList = document.getElementById("userOrders");
+    ordersList.innerHTML = orders.map(order => `
+        <li>Order ID: ${order.orderId} - Date: ${new Date(order.orderDate).toLocaleString()}</li>
+    `).join('');
+}
 
-// Запрос оценок пользователя
-document.getElementById("fetchUserRatings").addEventListener("click", async () => {
-    const userId = document.getElementById("userIdInputRatingsDetails").value;
-    if (!userId) {
-        alert("Please enter a User ID.");
-        return;
-    }
-    const response = await fetch(`${apiUrl}/user/${userId}/ratings`);
-    const ratings = await response.json();
-    const userRatings = document.getElementById("userRatings");
-    userRatings.innerHTML = "";
-    if (ratings.length === 0) {
-        userRatings.innerHTML = "<li>No ratings found.</li>";
-        return;
-    }
-    ratings.forEach(rating => {
-        const li = document.createElement("li");
-        li.textContent = `${rating.product.name} - Rating: ${rating.rating}`;
-        userRatings.appendChild(li);
-    });
-});
+// Display Products
+function displayProducts(elementId, products) {
+    const list = document.getElementById(elementId);
+    list.innerHTML = products.map(product => `
+        <li>
+            <strong>${product.name}</strong><br>
+            Category: ${product.category}<br>
+            Price: $${product.price}<br>
+            Rating: ${product.rating ? product.rating : "No rating"}
+        </li>
+    `).join('');
+}

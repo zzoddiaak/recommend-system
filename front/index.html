@@ -10,54 +10,38 @@
 <div class="container">
     <h1>Recommendation System</h1>
 
-    <!-- Раздел для информации о пользователе -->
-    <section class="user-details">
+    <!-- User Details -->
+    <section>
         <h2>User Details</h2>
         <input type="number" id="userIdInputDetails" placeholder="Enter User ID" />
         <button id="fetchUserDetails">Get User Details</button>
-        <div id="userDetails" class="details-output"></div>
+        <div id="userDetails"></div>
     </section>
 
-    <!-- Раздел для заказов пользователя -->
-    <section class="user-orders">
-        <h2>User Orders</h2>
-        <input type="number" id="userIdInputOrders" placeholder="Enter User ID" />
-        <button id="fetchUserOrders">Get User Orders</button>
-        <ul id="userOrders" class="list-output"></ul>
-    </section>
 
-    <!-- Раздел для оценок пользователя -->
-    <section class="user-ratings">
-        <h2>User Ratings</h2>
-        <input type="number" id="userIdInputRatingsDetails" placeholder="Enter User ID" />
-        <button id="fetchUserRatings">Get User Ratings</button>
-        <ul id="userRatings" class="list-output"></ul>
-    </section>
-
-    <!-- Раздел для топовых товаров -->
-    <section class="top-rated">
+    <!-- Top-Rated Products -->
+    <section>
         <h2>Top-Rated Products</h2>
         <button id="fetchTopRated">Get Top-Rated Products</button>
-        <ul id="topRatedProducts" class="list-output"></ul>
+        <ul id="topRatedProducts"></ul>
     </section>
 
-    <!-- Раздел для персонализированных рекомендаций -->
-    <section class="personal-recommendations">
+    <!-- Personalized Recommendations -->
+    <section>
         <h2>Personalized Recommendations</h2>
-        <input type="number" id="userIdInput" placeholder="Enter User ID" />
+        <input type="number" id="userIdInputPersonal" placeholder="Enter User ID" />
         <button id="fetchPersonalized">Get Personalized Recommendations</button>
-        <ul id="personalRecommendations" class="list-output"></ul>
+        <ul id="personalRecommendations"></ul>
     </section>
 
-    <!-- Раздел для рекомендаций на основе оценок -->
-    <section class="ratings-recommendations">
+    <!-- Recommendations Based on Ratings -->
+    <section>
         <h2>Recommendations Based on Ratings</h2>
         <input type="number" id="userIdInputRatings" placeholder="Enter User ID" />
         <button id="fetchBasedOnRatings">Get Recommendations Based on Ratings</button>
-        <ul id="recommendationsBasedOnRatings" class="list-output"></ul>
+        <ul id="recommendationsBasedOnRatings"></ul>
     </section>
 </div>
-
 <script src="script.js"></script>
 </body>
 </html>
