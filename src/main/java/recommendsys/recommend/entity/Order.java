@@ -1,6 +1,7 @@
 package recommendsys.recommend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,6 +28,7 @@ import java.util.Set;
 @Getter
 @Table(name = "orders")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

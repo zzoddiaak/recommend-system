@@ -1,6 +1,6 @@
+/* Общие стили для страницы */
 body {
     font-family: Arial, sans-serif;
-    line-height: 1.6;
     background: #f4f4f4;
     margin: 0;
     padding: 0;
@@ -15,10 +15,19 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-h1, h2 {
+h1 {
     color: #333;
+    text-align: center;
 }
 
+h2 {
+    color: #333;
+    font-size: 1.2em;
+    margin-top: 20px;
+    text-align: left;
+}
+
+/* Стили для кнопок */
 button {
     background: #007BFF;
     color: #fff;
@@ -26,25 +35,72 @@ button {
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
 }
 
 button:hover {
     background: #0056b3;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    padding: 5px 0;
-    border-bottom: 1px solid #ddd;
-}
-
+/* Стили для входных полей */
 input {
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+input:focus {
+    border-color: #007BFF;
+}
+
+/* Стили для секций */
+section {
+    margin-top: 20px;
+}
+
+.details-output {
+    margin-top: 15px;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.list-output {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 1em;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+/* Стиль для каждого блока с результатами */
+.user-details,
+.user-orders,
+.user-ratings,
+.top-rated,
+.personal-recommendations,
+.ratings-recommendations {
+    margin-bottom: 20px;
+}
+
+h2 {
+    color: #444;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
 }
