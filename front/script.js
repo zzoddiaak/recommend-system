@@ -35,18 +35,6 @@ document.getElementById("fetchUserDetails").addEventListener("click", async () =
     displayUserDetails(user);
 });
 
-// Fetch User Orders
-document.getElementById("fetchUserOrders").addEventListener("click", async () => {
-    const userId = document.getElementById("userIdInputOrders").value;
-    if (!userId) {
-        alert("Please enter a User ID.");
-        return;
-    }
-    const response = await fetch(`${apiUrl}/orders/${userId}`);
-    const orders = await response.json();
-    displayOrders(orders);
-});
-
 // Fetch Top-Rated Products
 document.getElementById("fetchTopRated").addEventListener("click", async () => {
     const response = await fetch(`${apiUrl}/top-rated`);

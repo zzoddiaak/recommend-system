@@ -46,25 +46,20 @@ public class RecommendationService {
     }
 
     public List<OrderDTO> getUserOrders(Long userId) {
-        // Получаем заказы пользователя по его ID
         List<Order> orders = orderRepository.findOrdersByUserId(userId);
 
         return orders.stream()
                 .map(order -> {
-                    // Получаем информацию о пользователе
                     User user = order.getUser();
 
-                    // Преобразуем элементы заказа в DTO
                     List<OrderItemDTO> orderItems = order.getOrderItems().stream()
                             .map(item -> new OrderItemDTO(item.getProduct().getName(), item.getQuantity(), item.getTotalPrice()))
                             .collect(Collectors.toList());
 
-                    // Подсчитываем общую стоимость заказа
                     Double totalPrice = orderItems.stream()
                             .mapToDouble(OrderItemDTO::getTotalPrice)
                             .sum();
 
-                    // Возвращаем DTO с полным набором данных
                     return new OrderDTO(order.getOrderId(), order.getOrderDate(), user.getUsername(), orderItems, totalPrice);
                 })
                 .collect(Collectors.toList());
